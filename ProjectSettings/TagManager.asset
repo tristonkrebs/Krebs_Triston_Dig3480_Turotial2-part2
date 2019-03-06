@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
+  - PickUp
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -50,4 +52,7 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 1762899675
+    locked: 0
+  - name: pickup
+    uniqueID: 3242918067
     locked: 0

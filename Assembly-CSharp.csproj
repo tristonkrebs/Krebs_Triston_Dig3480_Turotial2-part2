@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\movement.cs" />
     <Compile Include="Assets\scripts\playercontroller.cs" />
+    <Compile Include="Assets\scripts\Rotator.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Sampo/Desktop/unity stuff/Krebs_Triston_Dig3480_Turotial2-part2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
