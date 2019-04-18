@@ -16,6 +16,13 @@ public class playercontroller : MonoBehaviour
 	public GameObject cam;
 	private AudioSource[] source;
 	private Animator anim;
+	public Text timer;
+	public float seconds;
+	public float bonusspeed;
+	public float bonusdur;
+	private float bonusstart;
+	private bool bonus;
+	public Text bonustext;
 
 	private int lives;
 
@@ -30,6 +37,9 @@ public class playercontroller : MonoBehaviour
 		lives = 3;
 		Setlivestext();
 		source = GetComponents<AudioSource>();
+		bonus = false;
+		setTimerText();
+
 	}
 
 	void Update()
@@ -55,6 +65,7 @@ public class playercontroller : MonoBehaviour
 
 		if (Input.GetKey("escape"))
 			Application.Quit();
+		setTimerText();
 	}
 	private void OnCollisionStay2D(Collision2D collision)
 	{
@@ -74,12 +85,25 @@ public class playercontroller : MonoBehaviour
 			other.gameObject.SetActive(false);
 			count = count + 1;
 			SetCountText();
+			source[2].Play();
 		}
 		if (other.gameObject.CompareTag("enemy"))
 		{
 			other.gameObject.SetActive(false);
 			lives = lives - 1;
 			Setlivestext();
+		}
+		if (other.gameObject.CompareTag("bonus"))
+		{
+			float hold = speed;
+			speed = bonusspeed;
+			bonusspeed = hold;
+			other.gameObject.SetActive(false);
+			bonusstart = Time.time;
+			bonus = true;
+			setTimerText();
+
+
 		}
 	}
 	void SetCountText()
@@ -99,6 +123,7 @@ public class playercontroller : MonoBehaviour
 			WinText.text = "You Win!!";
 			source[0].Pause();
 			source[1].Play();
+
 		}
 
 	}
@@ -112,7 +137,34 @@ public class playercontroller : MonoBehaviour
 		}
 			
 	}
-		
-		
-	
+	void setTimerText()
+	{
+		float local = seconds - Time.time;
+		timer.text = "Seconds " + local.ToString("F0");
+		if (local <=0)
+		{
+			WinText.text = "You Lose";
+			timer.text = "Seconds 0";
+			Destroy(rb2d);
+		}
+		if (bonus)
+		{
+			float hold = Time.time - bonusstart;
+			if (hold >= bonusdur)
+			{
+				bonustext.text = "No Bonus";
+				bonus = false;
+
+				float slow = speed;
+				speed = bonusspeed;
+				bonusspeed = slow;
+
+			}
+			else
+				bonustext.text = (bonusdur - hold).ToString("F0") +" Bonus time remaining";
+		}
+		else
+			bonustext.text = "No Bonus";
+	}
+
 }

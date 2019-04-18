@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\bounsmover.cs" />
     <Compile Include="Assets\scripts\movement.cs" />
+    <Compile Include="Assets\scripts\movementAnimation.cs" />
     <Compile Include="Assets\scripts\playercontroller.cs" />
     <Compile Include="Assets\scripts\Rotator.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
